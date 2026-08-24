@@ -14,9 +14,11 @@
 </head>
 
 <body class="locked">
-    <!-- Gift intro: photos stay hidden until this gift is tapped -->
+    <!-- Gift intro: front photo stays until the gift is tapped -->
     <div id="gift-intro" onclick="openTheGift()">
-        <img src="./images/GiftBox.png" alt="Open your surprise">
+        <h1 class="intro-title">Happy Birthday <span>Priyosee</span></h1>
+        <img class="front-photo" src="./images/p10.jpg" alt="Front photo">
+        <img class="gift-btn" src="./images/GiftBox.png" alt="Open your surprise">
         <p>Tap the gift to open 🎁</p>
     </div>
 
@@ -148,6 +150,8 @@
             launchHeartConfetti();
             intro.classList.add("hide");
             document.body.classList.remove("locked");
+            // spread the cards out one by one
+            if (typeof window.startCarousel === "function") window.startCarousel();
         }
 
         // Confetti Explosions

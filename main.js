@@ -12,14 +12,30 @@ var bgMusicControls = true; // Show UI music control
 
 
 // ===================== start =======================
-// animation start after 1000 miliseconds
-setTimeout(init, 1000);
-
+// Cards stay collapsed at center until the gift is opened (see startCarousel)
 var odrag = document.getElementById('drag-container');
 var ospin = document.getElementById('spin-container');
 var aImg = ospin.getElementsByTagName('img');
 var aVid = ospin.getElementsByTagName('video');
 var aEle = [...aImg, ...aVid]; // combine 2 arrays
+
+// Collapse all cards into one pile at the center
+function collapseCards() {
+  for (var i = 0; i < aEle.length; i++) {
+    aEle[i].style.transition = "transform 1s";
+    aEle[i].style.transform = "translateZ(0px)";
+    aEle[i].style.transitionDelay = "0s";
+  }
+}
+collapseCards();
+
+// Spread the cards out one by one into the ring
+window.startCarousel = function () {
+  for (var i = 0; i < aEle.length; i++) {
+    aEle[i].style.transitionDelay = (0.35 + i * 0.15) + "s";
+    aEle[i].style.transform = "rotateY(" + (i * (360 / aEle.length)) + "deg) translateZ(" + radius + "px)";
+  }
+};
 
 // Size of images
 ospin.style.width = imgWidth + "px";
